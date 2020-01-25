@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Req, ValidationPipe} from '@nestjs/common';
+import {Body, Controller, Get, Post} from '@nestjs/common';
 import {RecipeService} from './recipe.service';
 import {CreateRecipeDto} from './dto/create-recipe.dto';
 
