@@ -1,7 +1,7 @@
 import {Module} from '@nestjs/common';
 import {RecipeModule} from './recipe/recipe.module';
-import {TypeOrmModule} from "@nestjs/typeorm";
-import {ConfigModule} from "@nestjs/config";
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {ConfigModule} from '@nestjs/config';
 
 @Module({
     imports: [RecipeModule,
@@ -15,7 +15,7 @@ import {ConfigModule} from "@nestjs/config";
             database: process.env.DATABASE_NAME,
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
             synchronize: true,
-        })]
+        })],
 })
 export class AppModule {
 }
