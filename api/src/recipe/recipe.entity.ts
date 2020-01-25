@@ -1,4 +1,4 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
 @Entity('recipes')
 export class Recipe {
@@ -15,8 +15,8 @@ export class Recipe {
     author: string;
 
     @CreateDateColumn()
-    createdAt: string;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updatedAt: number;
+    updatedAt: Date;
 }
