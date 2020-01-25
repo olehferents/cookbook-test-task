@@ -1,7 +1,8 @@
-import {Injectable} from "@nestjs/common";
-import {InjectRepository} from "@nestjs/typeorm";
-import {Recipe} from "./recipe.entity";
-import {Repository} from "typeorm";
+import {Injectable} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Recipe} from './recipe.entity';
+import {Repository} from 'typeorm';
+import {CreateRecipeDto} from './dto/create-recipe.dto';
 
 @Injectable()
 export class RecipeService {
@@ -9,5 +10,9 @@ export class RecipeService {
 
     async findAll(): Promise<Recipe[]> {
         return await this.recipeRepository.find();
+    }
+
+    async create(dto: CreateRecipeDto): Promise<Recipe> {
+        return await this.recipeRepository.save(dto);
     }
 }
