@@ -9,7 +9,13 @@ export class RecipeService {
     constructor(@InjectRepository(Recipe) private readonly recipeRepository: Repository<Recipe>) {}
 
     async findAll(): Promise<Recipe[]> {
-        return await this.recipeRepository.find();
+        return await this.recipeRepository.find(
+            {
+                select: ['id', 'title', 'description', 'author'],
+                order: {
+                    createdAt: 'DESC',
+                },
+            });
     }
 
     async create(dto: CreateRecipeDto): Promise<Recipe> {
