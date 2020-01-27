@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {fetchRecipes} from '../../actions/recipe';
@@ -7,7 +7,7 @@ import Recipe from '../../components/Recipe/Recipe';
 const RecipeContainer = (props) => {
     useEffect(() => {
         props.fetchRecipes();
-    }, []);
+    });
 
     return (
         <div>
