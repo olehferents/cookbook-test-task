@@ -2,7 +2,7 @@ import {
     CREATE_RECIPE_FAILED,
     CREATE_RECIPE_SUCCEEDED,
     REQUEST_RECIPES_FAILED,
-    REQUEST_RECIPES_SUCCEEDED
+    REQUEST_RECIPES_SUCCEEDED, UPDATE_RECIPE_FAILED, UPDATE_RECIPE_SUCCEEDED
 } from '../actions/recipe';
 
 const initialState = {
@@ -29,6 +29,16 @@ export const recipe = (state = initialState, action) => {
                 response: action.payload
             };
         case CREATE_RECIPE_FAILED:
+            return {
+                ...state,
+                response: action.payload
+            };
+        case UPDATE_RECIPE_SUCCEEDED:
+            return {
+                ...state,
+                response: action.payload
+            };
+        case UPDATE_RECIPE_FAILED:
             return {
                 ...state,
                 response: action.payload
