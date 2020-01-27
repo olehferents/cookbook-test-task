@@ -7,12 +7,13 @@ import Recipe from '../../components/Recipe/Recipe';
 const RecipeContainer = (props) => {
     useEffect(() => {
         props.fetchRecipes();
-    });
+    }, []);
 
     return (
         <div>
             {props.recipes.map((recipe) => {
                 return <Recipe
+                    key={recipe.id}
                     title={recipe.title}
                     description={recipe.description}
                     author={recipe.author}
