@@ -6,6 +6,9 @@ export const REQUEST_RECIPES_FAILED = 'REQUEST_RECIPES_FAILED';
 export const CREATE_RECIPE_SUCCEEDED = 'CREATE_RECIPE_SUCCEEDED';
 export const CREATE_RECIPE_FAILED = 'CREATE_RECIPE_FAILED';
 
+export const UPDATE_RECIPE_SUCCEEDED = 'UPDATE_RECIPE_SUCCEEDED';
+export const UPDATE_RECIPE_FAILED = 'UPDATE_RECIPE_FAILED';
+
 function successHandler(type, response) {
     return {
         type: type,
@@ -55,7 +58,31 @@ export const createRecipe = (title, description, author) => {
             await dispatch(successHandler(CREATE_RECIPE_SUCCEEDED, response));
             return response;
         } catch (error) {
-            return dispatch(successHandler(CREATE_RECIPE_FAILED, error))
+            return dispatch(errorHandler(CREATE_RECIPE_FAILED, error))
+        }
+    }
+};
+
+export const updateRecipe = (id, title, description, author) => {
+    return async dispatch => {
+        try {
+            let response =
+                await fetch(API_URL + 'recipes' + '/' + id, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: title,
+                        description: description,
+                        author: author
+                    })
+                });
+            response = await response.json();
+            await dispatch(successHandler(UPDATE_RECIPE_SUCCEEDED, response));
+            return response;
+        } catch (error) {
+            return dispatch(errorHandler(UPDATE_RECIPE_FAILED, error));
         }
     }
 };
