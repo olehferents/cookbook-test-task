@@ -34,3 +34,34 @@
     padding: 5px;
     color: #7EB3FF
 }
+
+.btnBlock {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+
+.toggleBtn {
+    background-color: #2300B0;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 32px;
+    color: #FFFFFF;
+}
+
+input {
+    text-align: center;
+    margin-bottom: 15px;
+    height: 20px;
+    min-height: 28px;
+    padding: 0 20px;
+    outline: 0;
+    border: 1px solid #e9e9e9;
+    border-radius: 2px;
+    font-size: 16px;
+}
