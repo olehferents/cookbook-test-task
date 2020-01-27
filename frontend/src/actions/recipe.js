@@ -1,37 +1,61 @@
+import {API_URL} from '../helpers/constants';
+
 export const REQUEST_RECIPES_SUCCEEDED = 'REQUEST_RECIPES';
 export const REQUEST_RECIPES_FAILED = 'REQUEST_RECIPES_FAILED';
+
+export const CREATE_RECIPE_SUCCEEDED = 'CREATE_RECIPE_SUCCEEDED';
+export const CREATE_RECIPE_FAILED = 'CREATE_RECIPE_FAILED';
+
+function successHandler(type, response) {
+    return {
+        type: type,
+        payload: response
+    }
+}
+
+function errorHandler(type, response) {
+    return {
+        type: type,
+        payload: response
+    }
+}
 
 export const fetchRecipes = () => {
     return async dispatch => {
         try {
             let response =
-                await fetch('recipes', {
+                await fetch(API_URL + 'recipes', {
                     method: 'GET',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': '*',
-                    }
                 });
             response = await response.json();
-            await dispatch(successHandler(response));
+            await dispatch(successHandler(REQUEST_RECIPES_SUCCEEDED, response));
             return response;
         } catch (error) {
-            return dispatch(errorHandler(error))
+            return dispatch(errorHandler(REQUEST_RECIPES_FAILED, error))
         }
     };
+};
 
-    function successHandler(response){
-        return {
-            type: REQUEST_RECIPES_SUCCEEDED,
-            payload: response
-        }
-    }
-
-    function errorHandler(response) {
-        return {
-            type: REQUEST_RECIPES_FAILED,
-            payload: response
+export const createRecipe = (title, description, author) => {
+    return async dispatch => {
+        try {
+            let response =
+                await fetch( API_URL + 'recipes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: title,
+                        description: description,
+                        author: author
+                    })
+                });
+            response = await response.json();
+            await dispatch(successHandler(CREATE_RECIPE_SUCCEEDED, response));
+            return response;
+        } catch (error) {
+            return dispatch(successHandler(CREATE_RECIPE_FAILED, error))
         }
     }
 };
-
