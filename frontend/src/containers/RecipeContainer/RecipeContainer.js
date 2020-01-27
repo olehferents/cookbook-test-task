@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {fetchRecipes} from '../../actions/recipe';
+import {fetchRecipes, updateRecipe} from '../../actions/recipe';
 import Recipe from '../../components/Recipe/Recipe';
 
 const RecipeContainer = (props) => {
@@ -14,9 +14,12 @@ const RecipeContainer = (props) => {
             {props.recipes.map((recipe) => {
                 return <Recipe
                     key={recipe.id}
+                    id={recipe.id}
                     title={recipe.title}
                     description={recipe.description}
                     author={recipe.author}
+                    editRecipe={props.editRecipe}
+                    fetchRecipe={props.fetchRecipes}
                 />
             })}
         </div>
@@ -31,7 +34,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchRecipes: bindActionCreators(fetchRecipes, dispatch)
+        fetchRecipes: bindActionCreators(fetchRecipes, dispatch),
+        editRecipe: bindActionCreators(updateRecipe, dispatch)
     }
 };
 
