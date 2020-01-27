@@ -1,9 +1,10 @@
 import React from 'react';
+import RecipeContainer from './containers/RecipeContainer/RecipeContainer';
 
 const App = () => {
     return (
         <div>
-            App
+            <RecipeContainer/>
         </div>
     )
 };
