@@ -4,6 +4,7 @@ import {Recipe} from './recipe.entity';
 import {Repository} from 'typeorm';
 import {CreateRecipeDto} from './dto/create-recipe.dto';
 import {UpdateRecipeDto} from './dto/update-recipe.dto';
+import {plainToClass} from 'class-transformer';
 
 @Injectable()
 export class RecipeService {
@@ -12,18 +13,19 @@ export class RecipeService {
     async findAll(): Promise<Recipe[]> {
         return await this.recipeRepository.find(
             {
-                select: ['id', 'title', 'description', 'author', 'createdAt'],
+                select: ['id', 'title', 'description', 'author'],
                 order: {
                     createdAt: 'DESC',
                 },
             });
     }
 
-    async create(dto: CreateRecipeDto): Promise<Recipe> {
-        return await this.recipeRepository.save(dto);
+    async create(dto: CreateRecipeDto): Promise<CreateRecipeDto> {
+        const entity = await this.recipeRepository.save(dto);
+        return plainToClass(CreateRecipeDto, entity);
     }
 
-    async update(id: number, dto: UpdateRecipeDto) {
+    async update(id: number, dto: UpdateRecipeDto): Promise<UpdateRecipeDto> {
         const toUpdate = await this.recipeRepository.findOne(id);
         delete toUpdate.author;
         const updated = Object.assign(toUpdate, dto);
