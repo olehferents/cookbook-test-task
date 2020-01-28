@@ -8,4 +8,10 @@ export class UpdateRecipeDto {
     @IsNotEmpty()
     @IsString()
     readonly description: string;
+
+
+    constructor(title: string, description: string) {
+        this.title = title;
+        this.description = description;
+    }
 }
