@@ -27,12 +27,14 @@ const Recipe = (props) => {
     if (isEditing) {
         return (
             <div className={styles.container}>
-                <div className={styles.item}>
+                <div className={styles.editItem}>
                     <div className={styles.header}>
                         <input type="text" name="title" value={recipe.title} onChange={handleValueChange}/>
                     </div>
                     <div className={styles.main}>
-                        <input type="text" name="description" value={recipe.description} onChange={handleValueChange}/>
+                        <textarea name="description" id="descriptuin" cols="30" rows="10" onChange={handleValueChange}>
+                            {recipe.description}
+                        </textarea>
                     </div>
                     <div className={styles.footer}>
                         <input type="text" name="author" value={recipe.author} onChange={handleValueChange}/>
@@ -53,13 +55,13 @@ const Recipe = (props) => {
         <div className={styles.container}>
             <div className={styles.item}>
                 <div className={styles.header}>
-                    {props.title}
+                    <p>{props.title}</p>
                 </div>
                 <div className={styles.main}>
-                    {props.description}
+                   <p>{props.description}</p>
                 </div>
                 <div className={styles.footer}>
-                    {props.author}
+                    <p>{props.author}</p>
                 </div>
                 <div className={styles.btnBlock}>
                     <button
